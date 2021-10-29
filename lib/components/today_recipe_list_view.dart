@@ -34,14 +34,42 @@ class TodayRecipeListView extends StatelessWidget {
           // a Container, 400 pixels tall, to hold ListView
           Container(
             height: 400,
-            // TODO: Add ListView Here
-            color: Colors.grey,
+            // sets the color to transparent
+            color: Colors.transparent,
+            // this widget creates 2 'IndexedWidgetBuilder's
+            child: ListView.separated(
+              // direction of the scroll
+              scrollDirection: Axis.horizontal,
+              // sets the number of items in the ListView
+              itemCount: recipes.length,
+              // creates the 'itemBuilder' callback and
+              // goes thru every item in the list
+              itemBuilder: (context, index) {
+                // get the recipe for the current index and build the card
+                final recipe = recipes[index];
+                return buildCard(recipe);
+              },
+              // creates a separatorBuilder callback
+              // which will go thru every item in the list
+              separatorBuilder: (context, index) {
+                // creates a SizedBox  for every item in the list
+                return const SizedBox(width: 16);
+              },
+            ),
           ),
         ],
       ),
     );
   }
 
-  // TODO: Add buildCard() widget here
+  Widget buildCard(ExploreRecipe recipe) {
+    if (recipe.cardType == RecipeCardType.card1) {
+      return Card1(recipe: recipe);
+    } else if (recipe.cardType == RecipeCardType.card2) {
+      return Card2(recipe: recipe);
+    } else if (recipe.cardType == RecipeCardType.card3) {
+      return Card3(recipe: recipe);
+    }
+  }
 
 }
