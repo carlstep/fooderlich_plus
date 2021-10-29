@@ -69,6 +69,8 @@ class TodayRecipeListView extends StatelessWidget {
       return Card2(recipe: recipe);
     } else if (recipe.cardType == RecipeCardType.card3) {
       return Card3(recipe: recipe);
+    } else {
+      throw Exception('This card doesn\'t exist yet');
     }
   }
 
