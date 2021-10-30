@@ -12,23 +12,37 @@ class ExploreScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // a placeholder
     // Build method creates FutureBuilder
+    // Runs an asynchronous task.
     return FutureBuilder(
-    /* 'FutureBuild' takes a 'Future' as a parameter - 'getExploreData' creates
-    a future that will return an 'ExploreData' instance. The 'ExploreData'
-    instance will contain two lists - 'todayRecipes' and 'friendPosts' */
+      /* 'FutureBuild' takes a 'Future' as a parameter - 'getExploreData'
+      creates a future that will return an 'ExploreData' instance. The
+      'ExploreData' instance will contain two lists - 'todayRecipes' and
+       'friendPosts' */
       future: mockService.getExploreData(),
       // within 'builder', use a 'snapshot' to check current state of 'Future'
       builder: (context, AsyncSnapshot<ExploreData> snapshot) {
-        // TODO: Add Nested List Views
+        // Checks IF the future is complete
         // 'Future' is complete and can extract data to pass to the widget
         if (snapshot.connectionState == ConnectionState.done) {
-          /* 'snapshot.data' returns 'ExploreData' to extract 'todayRecipes'
-          and pass to the list view - 'TodayRecipeListView' */
-          final recipes = snapshot.data?.todayRecipes ?? [];
-          // returns the TodayRecipeListView
-          return TodayRecipeListView(recipes: recipes);
+          // IF future is complete, return the ListView.
+          // in this instance, ListView will hold two ListViews as children
+          return ListView(
+            // sets the scroll-direction to vertical
+            scrollDirection: Axis.vertical,
+            children: [
+              // returns the TodayRecipeListView
+              TodayRecipeListView(recipes: snapshot.data?.todayRecipes ?? []),
+              // SizedBox for spacing
+              const SizedBox(height: 16),
+              // a Container as a placeholder for FriendPostListView
+              // TODO: Replace with FriendPostListView
+              Container(
+                height: 400,
+                color: Colors.green,
+              ),
+            ],
+          );
         } else {
           // shows a 'spinner' to let user know something is happening
           return const Center(
