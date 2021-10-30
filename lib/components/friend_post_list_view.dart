@@ -31,7 +31,6 @@ class FriendPostListView extends StatelessWidget {
           style: Theme.of(context).textTheme.headline1),
           // spacing by way of SizedBox
           const SizedBox(height: 16),
-          // TODO: Add PostListView here
           // create ListView.separated with two
           // IndexWidgetBuilder callbacks
           ListView.separated(
