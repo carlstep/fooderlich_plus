@@ -32,11 +32,34 @@ class FriendPostListView extends StatelessWidget {
           // spacing by way of SizedBox
           const SizedBox(height: 16),
           // TODO: Add PostListView here
+          // create ListView.separated with two
+          // IndexWidgetBuilder callbacks
+          ListView.separated(
+            // because nesting 2 ListViews, set primary to false
+            // flutter now knows this isn't the primary scroll view
+            primary: false,
+            // disables the scrolling for the nested ListView
+            physics: const NeverScrollableScrollPhysics(),
+            // creates a fixed-length scrollable list
+            shrinkWrap: true,
+            scrollDirection: Axis.vertical,
+            itemCount: friendPosts.length,
+            itemBuilder: (context, index) {
+              // for every item in the list, create a FriendPostTile
+              final post = friendPosts[index];
+              return FriendPostTile(post: post);
+            },
+            separatorBuilder: (context, index) {
+              // for every item, create SizedBox for spacing
+              return const SizedBox(height: 16);
+            },
+          ),
           // padding for the end of the list
           const SizedBox(height: 16),
         ],
       ),
     );
   }
-  
 }
+
+
