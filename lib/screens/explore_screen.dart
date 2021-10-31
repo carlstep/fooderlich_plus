@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:fooderlich/components/components.dart';
-import 'package:fooderlich/models/models.dart';
-import 'package:fooderlich/api/mock_fooderlich_service.dart';
+import '../components/components.dart';
+import '../models/models.dart';
+import '../api/mock_fooderlich_service.dart';
 
 class ExploreScreen extends StatelessWidget {
   // creates a service to mock a server response
@@ -50,3 +50,4 @@ class ExploreScreen extends StatelessWidget {
     );
   }
 }
+// TODO: Challenge 1 - Add a scroll listener
